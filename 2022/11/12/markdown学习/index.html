@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="apple-touch-icon" sizes="76x76" href="/null">
+    <link rel="icon" type="image/png" href="/null">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Hexo</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+    <meta name="description" content="">
+    <meta name="author" content="Higanbanalab">
+    <meta name="keywords" content="">
+    <style>
+
+
+    
+    :root{
+        --shadow-color: rgba(0,0,0,0.2);
+        --sec-shadow: rgba(0,0,0,0.03);
+        --shadow-hover-color: rgba(0,0,0,0.28);
+        --first-text-color: #475b6d;
+        --second-text-color: #37475b;
+        --third-text-color: #858585;
+        --default-text-color: #505050;
+        --default-link-color: #007bff;
+        --link-color: #000000;
+        --second-link-color: #4F9BFA;
+        --code-color:rgba(27,31,35,.05);
+        --post-bkg-color: #fff;
+        --page-bkg-color: #f2f5f8;
+        --nav-a-hover-color: #3498db;
+        --post-sec-text-color: #718096;
+        --sec-bkg: #f2f5f8;
+        --color-mode: 'light';
+        --bkg-h: rgba(255,255,255,0.6);
+        --bkg-m: #e1e4e8;
+        --home-title-color: #4169E1;
+        --shadow: 0 4px 10px rgba(0,2,4,0.06),0 0 1px rgba(0,2,4,0.11);
+        --hr-color: #ddd;
+        --bg-t: #f4f4f4;
+        --nav-bkg: rgba(255,255,255,0.6);
+    }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
+
+  :root:not([data-theme]) {
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+  }
+}
+
+[data-theme='dark'] {
+    --shadow-color: rgba(0,0,0,0.2);
+    --shadow-hover-color: rgba(0,0,0,0.28);
+    --first-text-color: hsla(0,0%,100%,0.92);
+    --second-text-color: hsla(0,0%,100%,0.86);
+    --third-text-color: #a7a9ad;
+    --default-text-color: #505050;
+    --default-link-color: #1589e9;
+    --link-color: #000000;
+    --second-link-color: #30a9de;
+    --post-bkg-color: #252d38;
+    --page-bkg-color: #181c27;
+    --nav-a-hover-color: #3498db;
+    --post-sec-text-color: #a7a9ad;
+    --sec-bkg: #364151;
+    --bkg-h: rgba(255,255,255,0.2);
+    --bkg-m: rgba(255,255,255,0.1);
+    --home-title-color: rgb(226, 82, 90);
+    --code-color:#3e4b5e;
+    --shadow: none;
+    --hr-color: #718096;
+    --bg-t: #364151;
+    --nav-bkg: rgba(13,17,23,0.6);
+}
+
+</style>
+
+
+
+<style>
+#page-main,footer,.p-btn{
+    display: none;
+}
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: overlay;
+}
+body{
+    background-color: var(--page-bkg-color);
+    color: var(--second-text-color);
+    overflow-y: scroll;
+}
+a {
+    color: var(--default-link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+a:hover{
+    color: var(--second-link-color);
+}
+.main-content,.post-card-main{
+    margin: 30px;
+}
+
+
+
+@media (max-width: 410px){
+    .post-card-main{
+        max-width: 350px!important;
+    }
+}
+
+@media (max-width: 980px){
+    .post-card-main{
+        max-width: 520px!important;
+    }
+}
+
+
+@media (min-width: 780px){ 
+    h3{
+        font-size: 1.5rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 1280px){ 
+    h3{
+        font-size: 1.7rem;
+        line-height: 1.5em;
+    }
+}
+@media (min-width: 2096px){ 
+    h3{
+        font-size: 1.8rem;
+        line-height: 1.5em;
+    }
+}
+
+.text-center{
+    text-align: center!important;
+}
+.middle-center{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 54px;
+    padding: 0 1.25rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--bkg-m);
+    background-color: var(--nav-bkg);
+}
+header .header__left, header .header__right {
+    display: flex;
+    align-items: center;
+    font-family: rubik,sans-serif,Varela Round;
+}
+header .header__left .logo__text {
+    font-size: 18px;
+    font-weight: 450;
+    padding: 14.5px 10px;
+    border-radius: 5px;
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus {
+    height: 54px;
+    padding: 0 0 0 15px;
+}
+header .header__right .button {
+    color: var(--second-text-color);
+}
+header .header__right .navbar__menus .navbar-menu {
+    display: inline-block;
+    align-items: center;
+    height: 54px;
+    padding: 0 10px;
+    font-size: 16px;
+    line-height: 54px;
+}
+header .header__right .dropdown-icon {
+    display: none;
+    height: 54px;
+    padding: 15px 10px;
+    border: 0;
+    background-color: transparent;
+}
+header .header__right .dropdown-menus {
+    line-height: 2rem;
+    animation: slide-in .15s ease 1;
+    display: none;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(54px + 10px);
+    border-radius: 6px;
+    padding: 24px;
+    background-color: var(--page-bkg-color);
+    border: 1px solid var(--bkg-m);
+    z-index: 9999;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+header .header__right #btn-search, header .header__right #btn-toggle-dark{
+    display: inline-block;
+    padding:  18px 10px;
+    height: 25px;
+}
+header .header__right #btn-dropdown{
+  display: inline-block;
+  padding:  13.5px 0;
+}
+header .header__right .dropdown-menus .dropdown-menu {
+    padding: 10px;
+    color: var(--second-text-color);
+}
+@media screen and (max-width: 764px){
+.navbar__menus {
+    display: none!important;
+}
+.dropdown-icon {
+    display: inline-block!important;
+}
+}
+.p-btn{
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    contain: layout;
+}
+.toc-btn,.click-btn{
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    align-items: center;
+    margin-top: .5rem;
+    font-size: .75rem;
+    background-color: var(--sec-bkg);
+    display: block;
+    padding: 0.9rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(48,55,66,.15);
+    border: none;
+    border-radius: 0.5rem;
+    line-height: 1;
+    color: var(--first-text-color);
+}
+.toc-link{
+    color: var(--second-text-color);
+}
+
+#css-loading h3{
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+    position: fixed;
+    top: 200px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    animation: cssLoad;
+    animation-delay: 0.3s;
+    -webkit-animation: cssLoad;
+    -webkit-animation-delay: 0.3s;
+}
+@keyframes cssLoad {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.9;
+    }
+}
+
+
+.memorial {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); filter:gray;
+}
+
+
+    .post-copyright:after {
+        position: absolute;
+        color: #fff;
+        background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'%3E%3Cpath fill='gray' d='M245.8 214.9l-33.2 17.3c-9.4-19.6-25.2-20-27.4-20-22.2 0-33.3 14.6-33.3 43.9 0 23.5 9.2 43.8 33.3 43.8 14.4 0 24.6-7 30.5-21.3l30.6 15.5a73.2 73.2 0 01-65.1 39c-22.6 0-74-10.3-74-77 0-58.7 43-77 72.6-77 30.8-.1 52.7 11.9 66 35.8zm143 0l-32.7 17.3c-9.5-19.8-25.7-20-27.9-20-22.1 0-33.2 14.6-33.2 43.9 0 23.5 9.2 43.8 33.2 43.8 14.5 0 24.7-7 30.5-21.3l31 15.5c-2 3.8-21.3 39-65 39-22.7 0-74-9.9-74-77 0-58.7 43-77 72.6-77C354 179 376 191 389 214.8zM247.7 8C104.7 8 0 123 0 256c0 138.4 113.6 248 247.6 248C377.5 504 496 403 496 256 496 118 389.4 8 247.6 8zm.8 450.8c-112.5 0-203.7-93-203.7-202.8 0-105.5 85.5-203.3 203.8-203.3A201.7 201.7 0 01451.3 256c0 121.7-99.7 202.9-202.9 202.9z'/%3E%3C/svg%3E");
+        content: ' ';
+        height: 10rem;
+        width: 10rem;
+        right: -2rem;
+        top: -2rem;
+        opacity: .1;
+    }
+
+</style>
+
+    
+
+    
+        <!--
+        <link rel="stylesheet" href="/css/page.css" media="print"
+            onload="this.media='all';this.onload=null">
+        <noscript>-->
+            <link rel="stylesheet" href="/css/page.css">
+        <!--</noscript>-->
+    
+    
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.css">
+    </noscript>
+
+    
+    <script src="/js/main.js"></script>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body>
+        <header>
+            
+<div class="header__left">
+	<a href="/" class="button"><span class="logo__text">Higanbanalab&#39;s Blog</span></a>
+</div>
+<div class="header__right">
+	<div class="navbar__menus">
+		
+		<a href="/" class="button">
+			<div class="navbar-menu">首页</div>
+		</a>
+		
+		<a href="/archives/" class="button">
+			<div class="navbar-menu">归档</div>
+		</a>
+		
+		<a href="/categories/" class="button">
+			<div class="navbar-menu">分类</div>
+		</a>
+		
+		<a href="/tags/" class="button">
+			<div class="navbar-menu">标签</div>
+		</a>
+		
+	</div>
+	
+	<a href="/search/" class="button">
+		<div id="btn-search">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32">
+				<path
+					d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z">
+				</path>
+			</svg>
+		</div>
+	</a>
+	
+	<a href="javaScript:void(0);" class="button" id="btn-toggle-dark">
+		<div>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+			</svg>
+		</div>
+	</a>
+	<a href="javaScript:void(0);" class="dropdown-icon button">
+		<div id="btn-dropdown">
+			<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024" width="24" height="24" fill="currentColor"
+				stroke="currentColor" stroke-width="32" stroke-linecap="round">
+				<path
+					d="M903.43 561.52H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 204.31H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24zM903.43 918.73H148.8c-13.25 0-24-10.75-24-24s10.75-24 24-24h754.63c13.25 0 24 10.75 24 24s-10.75 24-24 24z"
+					fill="currentColor"></path>
+			</svg>
+		</div>
+	</a>
+	<div class="dropdown-menus" id="dropdown-menus">
+		
+		<a href="/" class="dropdown-menu button">首页</a>
+		<br>
+		
+		<a href="/archives/" class="dropdown-menu button">归档</a>
+		<br>
+		
+		<a href="/categories/" class="dropdown-menu button">分类</a>
+		<br>
+		
+		<a href="/tags/" class="dropdown-menu button">标签</a>
+		<br>
+		
+	</div>
+</div>
+
+        </header>
+        <div id="top"></div>
+        <div id="page-main" class="main-content">
+        <div class="mg-top">
+            
+
+<article class="page">
+<div id="post-meta-m">
+    <div class="post-meta" id="post-meta">
+  <h3></h3>
+    
+      <span class="post-meta-label">
+        Higanbanalab
+      </span>
+    
+    
+      <span class="post-meta-label">
+        <span class="p-dot"></span>
+        <time datetime="2022-11-12 13:05" pubdate>
+          2022-11-12
+        </time>
+      </span>
+    
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        共 665 字
+      </span>
+    
+    
+    
+  </div>
+  
+</div>
+<div class="article-m">
+  <div class="post-toc">
+    
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%BA%E8%B0%83"><span class="toc-number">1.</span> <span class="toc-text">强调</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">2.1.</span> <span class="toc-text">有序列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">2.2.</span> <span class="toc-text">无序列表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-number">4.</span> <span class="toc-text">代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">单行代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">5.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC"><span class="toc-number">6.</span> <span class="toc-text">表格</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E6%83%85"><span class="toc-number">7.</span> <span class="toc-text">表情</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E6%83%85%E5%8D%9A%E5%AE%A2"><span class="toc-number">7.1.</span> <span class="toc-text">表情博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%A5-amp-x%E5%BC%80%E5%A4%B4"><span class="toc-number">7.1.1.</span> <span class="toc-text">1.以&amp;#x开头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8C%89-xxxword"><span class="toc-number">7.1.2.</span> <span class="toc-text">2.按 :xxxword:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ld246%E8%A1%A8%E6%83%85%E7%AC%A6%E5%8F%B7"><span class="toc-number">7.1.3.</span> <span class="toc-text">3.ld246表情符号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%A2%E8%A1%8C-amp-%E8%A1%8C%E9%97%B4%E8%B7%9D%E9%97%AE%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">换行&amp;行间距问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E9%97%AE%E9%A2%98"><span class="toc-number">9.</span> <span class="toc-text">链接问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E5%86%85%E9%93%BE%E6%8E%A5"><span class="toc-number">9.0.0.0.1.</span> <span class="toc-text">文档内链接</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pig%E7%99%BE%E7%A7%91"><span class="toc-number">9.0.0.1.</span> <span class="toc-text">pig百科</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LaTex"><span class="toc-number">10.</span> <span class="toc-text">LaTex</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%8A%E6%A0%87"><span class="toc-number">10.1.</span> <span class="toc-text">1.上标^</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%8B%E6%A0%87"><span class="toc-number">10.2.</span> <span class="toc-text">2.下标_</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8F%92%E5%85%A5%E6%B0%B4%E5%B9%B3%E7%BA%BF-overline%E6%88%96-underline"><span class="toc-number">10.3.</span> <span class="toc-text">3.插入水平线\overline或\underline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%B9%B3%E6%96%B9%E6%A0%B9-sqrt-n-%E9%BB%98%E8%AE%A4n-2-%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9"><span class="toc-number">10.4.</span> <span class="toc-text">4.平方根\sqrt[n] 默认n&#x3D;2,可以修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%86%E6%95%B0-frac"><span class="toc-number">10.5.</span> <span class="toc-text">5.分数\frac{}{}</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%A7%AF%E5%88%86-int"><span class="toc-number">10.6.</span> <span class="toc-text">6.积分\int</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%B1%82%E5%92%8C-sum-or-sum-limits"><span class="toc-number">10.7.</span> <span class="toc-text">7.求和\sum or \sum\limits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%90%91%E9%87%8F-vec-%E5%A4%9A%E7%AC%A6%E5%8F%B7%E7%94%A8-overrightarrow%E6%88%96%E8%80%85-overleftarrow"><span class="toc-number">10.8.</span> <span class="toc-text">8.向量\vec 多符号用\overrightarrow或者\overleftarrow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7-amp-%E7%A9%BA%E6%A0%BC-quad"><span class="toc-number">10.9.</span> <span class="toc-text">9.常用数学符号&amp;空格\quad</span></a></li></ol></li></ol>
+    
+  </div>
+    <div id="article">
+      <div id="post-content" class="markdown-body textretty">
+        <h1 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h1><p>1.<em>斜体</em> <em>斜体</em> 或者<em>Ctrl+I</em><br>2.<strong>粗体</strong>:  粗体<strong>也可以用两个<code>**</code>包裹</strong>，点击源代码查看此示例<br>3.<em><strong>粗斜体</strong></em> 也可以是<em><strong>Ctrl+B+I</strong></em><br>4.~ <del>删除线</del> ~<br>5.下划线：<u> 下划线</u>，     <u>你好</u> <code>Ctrl</code>加U也可以是下划线<br>6.脚注：好大的<a href="%E4%B8%80%E7%A7%8D%E4%BC%9A%E9%A3%9E%E7%9A%84%EF%BC%8C%E4%B8%A4%E4%B8%AA%E8%84%9A%E7%9A%84%E5%8A%A8%E7%89%A9">^鸟</a>结束。</p>
+<p>脚注2：什么是<a href="%E4%B8%8D%E5%9C%A8%E5%9C%B0%E4%B8%8A">^飞机</a>呢？</p>
+<p>脚注3：啥<a href="%E5%A5%BD%E5%90%A7">^大炮</a></p>
+<p>搜索<a href="%E5%91%B3%E9%81%93%E4%B8%8D%E9%94%99%E5%93%A6">^鱼</a>啥是<a href="%E6%95%B0%E5%AD%A6%E7%9A%84%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF">^微积分</a></p>
+<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><ol>
+<li>数学  <ol>
+<li>微积分</li>
+<li>概率论</li>
+<li>线性代数</li>
+</ol>
+</li>
+<li>英语</li>
+<li>专业课</li>
+<li>政治</li>
+</ol>
+<h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><ul>
+<li><p>无须1</p>
+</li>
+<li><p>无须2</p>
+</li>
+<li><p>无序3</p>
+</li>
+</ul>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><blockquote>
+<p>你好  </p>
+<blockquote>
+<p>飞行器</p>
+<ol>
+<li>飞机</li>
+<li>飞艇<ul>
+<li>大飞艇</li>
+<li>小飞艇</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>天气</p>
+</blockquote>
+<h1 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h1><h2 id="单行代码"><a href="#单行代码" class="headerlink" title="单行代码"></a>单行代码</h2><blockquote>
+<ol>
+<li>使用四个空格或者tab键</li>
+<li>使用三个&#96;包含代码块</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;hello\n&quot;</span>);</span><br><span class="line"> reyurn <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;你好\n&quot;</span>);</span><br><span class="line"> reyurn <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>&#96;~·</p>
+<h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><blockquote>
+<p>！<a target="_blank" rel="noopener" href="https://t7.baidu.com/it/u=3741845350,3966179492&fm=193&f=GIF">美女</a></p>
+</blockquote>
+<p>  <img src="https://cdn.jsdelivr.net/gh/higanbanalab/image@main/imag/202211041334311.jpeg" alt="img"></p>
+<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><p>使用|来分割</p>
+<table>
+<thead>
+<tr>
+<th align="left">种类</th>
+<th>名称</th>
+<th align="left">评分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">禽类</td>
+<td>小王</td>
+<td align="left">9.08</td>
+</tr>
+<tr>
+<td align="left">植物</td>
+<td>张三</td>
+<td align="left">9.12</td>
+</tr>
+</tbody></table>
+<h1 id="表情"><a href="#表情" class="headerlink" title="表情"></a>表情</h1><blockquote>
+<p>用法:  冒号,加英文单词,加冒号</p>
+<p>示例：</p>
+<p>:camera:</p>
+</blockquote>
+<p>:smile:</p>
+<p>:laughing:</p>
+<p>:heart:</p>
+<p>:cake:</p>
+<p>:kaaba:</p>
+<p>:baby:</p>
+<p>:clock1030:</p>
+<p>:gift_heart:</p>
+<h2 id="表情博客"><a href="#表情博客" class="headerlink" title="表情博客"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/penriver/article/details/121356728">表情博客</a></h2><h3 id="1-以-amp-x开头"><a href="#1-以-amp-x开头" class="headerlink" title="1.以&amp;#x开头"></a>1.以&amp;#x开头</h3><p> <a target="_blank" rel="noopener" href="https://apps.timwhitlock.info/emoji/tables/unicode">Emoji Unicode Tables</a> 的表情符号可以按此方式插入，<br>即将Unicode的值 中的 U+ 替换为 &amp;#x，并加;结尾</p>
+<h3 id="2-按-xxxword"><a href="#2-按-xxxword" class="headerlink" title="2.按 :xxxword:"></a>2.按 :xxxword:</h3><p> 格式 <a target="_blank" rel="noopener" href="https://www.webfx.com/tools/emoji-cheat-sheet/">webfx</a></p>
+<h3 id="3-ld246表情符号"><a href="#3-ld246表情符号" class="headerlink" title="3.ld246表情符号"></a>3.<a target="_blank" rel="noopener" href="https://ld246.com/emoji/index.html">ld246</a>表情符号</h3><p><font color="red" font-size="宋体"	>注意:</font></p>
+<p><font color="green"> 你好!</font></p>
+<h1 id="换行-amp-行间距问题"><a href="#换行-amp-行间距问题" class="headerlink" title="换行&amp;行间距问题"></a>换行&amp;行间距问题</h1><ol>
+<li><p><code>shift+enter</code>&#x3D;&#x3D;单回车，段落内换行<br>你看这一行和上一行的间距是不是比下面示例的紧凑</p>
+</li>
+<li><p><code>enter</code>&#x3D;&#x3D;单回车，新建段落</p>
+</li>
+<li><p>两个<code>enter</code>退出</p>
+</li>
+</ol>
+<p>你看这一行文字和上面的文字间距是不是比序号1的大，查看源代码更能体现出来。</p>
+<ol start="3">
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dnhmyx/p/15657135.html?share_token=95DDA30D-B26F-4B11-9B90-3A2540887E81&tt_from=copy_link&utm_source=copy_link&utm_medium=toutiao_ios&utm_campaign=client_shar">有关Typora行距的问题</a></li>
+</ol>
+<h1 id="链接问题"><a href="#链接问题" class="headerlink" title="链接问题"></a>链接问题</h1><ol>
+<li><p>网页链接<br>按组<code> Ctrl</code>点击链接可以进入网页<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/">哔哩哔哩</a></p>
+</li>
+<li><h5 id="文档内链接"><a href="#文档内链接" class="headerlink" title="文档内链接"></a>文档内链接</h5><p><a href="####pig%E7%99%BE%E7%A7%91">按住<code>Ctrl</code>并点击此处文字了解pig</a></p>
+</li>
+</ol>
+<p>||||||||||||||||||||<br>    |</p>
+<p>​          |</p>
+<p>​              | </p>
+<p>​                   |</p>
+<p>​                          |</p>
+<p>​                                |</p>
+<p>​                                       |</p>
+<p>​                                |</p>
+<p>​                          |</p>
+<p>​                    |</p>
+<p>​               |</p>
+<p>​           |</p>
+<p>​        |</p>
+<p>​    | ||||||||||||||||||||</p>
+<p>​                                               |</p>
+<p>​                                            |</p>
+<p>​                                         |</p>
+<p>​                                       |</p>
+<p>​                                     |</p>
+<p>​                                  |</p>
+<p>​                               |</p>
+<p>​                           |</p>
+<p>​                      |</p>
+<p>​                  |<br>​              |</p>
+<p>​         |</p>
+<p>​       |</p>
+<p>​            |</p>
+<p>​                 |</p>
+<p>​                      |</p>
+<p>​                             |</p>
+<p>​                                    |</p>
+<p>​                                         |</p>
+<p>​                                              |</p>
+<p>|||||||||||||||||||||<br>|||||||||||||||||||||</p>
+<p>||||||||||||||||||||||<br>|||||||||||||||||||<br>|||||||||||||||||||||<br>|||||||||||||||||<br>|||||||||||||||||||||<br>|||||||||||||||||||<br>|||||||||||||||||||<br>||||||||||||||||||||<br>|||||||||||||||||||||<br>|||||||||||||||||||||||<br>|||||||||||||||||||<br>||||||||||||||||||||<br>||||||||||||||||||<br>||||||||||||||||||||||<br>|||||||||||||||||||||<br>|||||||||||||||||||||<br>||||||||||||||||||||<br>||||||||||||||||||||<br>||||||||||||||||||||||||</p>
+<h4 id="pig百科"><a href="#pig百科" class="headerlink" title="pig百科"></a>pig百科</h4><p>pig是一种很可爱的动物，友善，聪明，易于相处</p>
+<p><a href="####%E6%96%87%E6%A1%A3%E5%86%85%E9%93%BE%E6%8E%A5">回到文档内链接</a></p>
+<h1 id="LaTex"><a href="#LaTex" class="headerlink" title="LaTex"></a>LaTex</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guikunchen/article/details/88652407?share_token=D0F4E48A-CFFB-407A-AF29-322E91593C49&tt_from=copy_link&utm_source=copy_link&utm_medium=toutiao_ios&utm_campaign=client_share"><strong>链接</strong></a></p>
+<p> <em><strong>在Typora中输入<code>$$</code>然后回车即可插入数学公式</strong></em></p>
+<h2 id="1-上标"><a href="#1-上标" class="headerlink" title="1.上标^"></a>1.上标<code>^</code></h2><p>$$<br>b^2+d^{55555}<br>$$</p>
+<h2 id="2-下标"><a href="#2-下标" class="headerlink" title="2.下标_"></a>2.下标<code>_</code></h2><p>$$<br>f_X(x)&#x3D;x^2+x^{0.5}+76<br>$$</p>
+<h2 id="3-插入水平线-overline或-underline"><a href="#3-插入水平线-overline或-underline" class="headerlink" title="3.插入水平线\overline或\underline"></a>3.插入水平线<code>\overline或\underline</code></h2><p>$$<br>\overline{a^3+b^4}&#x3D;\underline{pig^{999}}<br>$$</p>
+<h2 id="4-平方根-sqrt-n-默认n-2-可以修改"><a href="#4-平方根-sqrt-n-默认n-2-可以修改" class="headerlink" title="4.平方根\sqrt[n] 默认n=2,可以修改"></a>4.平方根<code>\sqrt[n] 默认n=2,可以修改</code></h2><p>$$<br>\sqrt[3]{c+b^{0.999963}+x^{357}}&#x3D;9999.06<br>$$</p>
+<h2 id="5-分数-frac"><a href="#5-分数-frac" class="headerlink" title="5.分数\frac{}{}"></a>5.分数<code>\frac&#123;&#125;&#123;&#125;</code></h2><p>$$<br>\frac{hero}{beautiful}<br>$$</p>
+<h2 id="6-积分-int"><a href="#6-积分-int" class="headerlink" title="6.积分\int"></a>6.积分<code>\int</code></h2><p>$$<br>\int_{0}^{x}x^2+5x\quad dx<br>$$</p>
+<h2 id="7-求和-sum-or-sum-limits"><a href="#7-求和-sum-or-sum-limits" class="headerlink" title="7.求和\sum or \sum\limits"></a>7.求和<code>\sum or \sum\limits</code></h2><p>$$<br>\sum_{a}^{b}<br>$$</p>
+<h2 id="8-向量-vec-多符号用-overrightarrow或者-overleftarrow"><a href="#8-向量-vec-多符号用-overrightarrow或者-overleftarrow" class="headerlink" title="8.向量\vec 多符号用\overrightarrow或者\overleftarrow"></a>8.向量<code>\vec 多符号用\overrightarrow或者\overleftarrow</code></h2><p>$$<br>\vec a&#x3D;\overrightarrow{cd}&#x3D;\overleftarrow{dc}<br>$$</p>
+<p>$$<br>\overrightarrow{ef}&#x3D;\overrightarrow{mn}<br>$$</p>
+<h2 id="9-常用数学符号-amp-空格-quad"><a href="#9-常用数学符号-amp-空格-quad" class="headerlink" title="9.常用数学符号&amp;空格\quad"></a>9.常用数学符号&amp;空格<code>\quad</code></h2><p>$$<br>\alpha\quad<br>\beta\quad<br>\theta\quad<br>小写\pi大写\Pi\quad<br>\gamma\quad<br>小写\delta大写\Delta\quad<br>+-\times\div&#x3D;\quad<br>$$</p>
+
+      </div>
+    </div>
+</div>
+
+
+<div class="post-footer">
+  
+  <div class="donate text-center">
+    <span></span>
+    <div class="donate-way">
+      
+    </div>
+  </div>
+  
+
+  <div class="post-copyright">
+    <p style="margin: 5px 0;">文章作者：<a href="/">Higanbanalab</a></p>
+    <p style="margin: 5px 0;">文章链接：<a href="https://higanbanalab.github.io/2022/11/12/markdown%E5%AD%A6%E4%B9%A0/">https://higanbanalab.github.io/2022/11/12/markdown%E5%AD%A6%E4%B9%A0/</a></p>
+    <p style="margin: 5px 0;">版权声明：本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处，谢谢。</p>
+  </div>
+  
+</div>
+
+    <!-- Comments -->
+    <div class="comments">
+        
+        
+    </div>
+
+</article>
+
+
+        </div>
+        
+<footer class="text-center">
+    
+    
+    
+    
+    
+    <p>&copy; 2022&nbsp;&nbsp;Higanbanalab's Blog</p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme by <a href="https://github.com/hifun-team/hexo-theme-miracle" target="_blank">Miracle</a></p>
+    
+    
+</footer>
+
+<div class="p-btn">
+    
+        <a class="toc-btn" id="toc-btn"><i id="i-menu"></i></a>
+    
+    <a href="#top" class="click-btn">
+      <i id="i-up"></i>
+    </a>
+</div>
+
+<!-- SCRIPTS -->
+
+
+
+
+
+
+
+<script>
+    document.getElementById("btn-dropdown").addEventListener('click', () => {
+      toggleClass("#dropdown-menus","display-inline");
+    });
+    console.log('\n' + ' %c Powered by Hexo Theme Miracle ' + ' %c https://github.com/hifun-team/hexo-theme-miracle ' + '\n' + '\n', 'color: #fff; background: #4F9BFA; padding:5px 0;', 'background: #FFF; padding:5px 0;');
+
+    
+
+    
+  /* 小彩蛋: 饮茶先啦 */
+  setTimeout(() => {
+    var time = new Date();
+    if (time.getHours() == 15) {
+      let comment = document.createComment(' 三点几嚟！饮茶先啦！ ');
+      document.body.insertBefore(comment, document.getElementsByTagName('header')[0]);
+    }
+  },1);
+    
+</script>
+
+
+<script>
+    var postImg = document.querySelectorAll("article[class=page] img");
+    for (let imgi = 0; imgi < postImg.length; imgi++) {
+        postImg[imgi].onclick = () => {
+            let zoomImg = document.createElement("div");
+            zoomImg.id = "zoomImg";
+            zoomImg.innerHTML = `<div id="zoom-picture"></div>
+    <div class="poptrox-overlay"
+        style="position: fixed; left: 0px; top: 0px; z-index: 20000; width: 100%; height: 100%; text-align: center; cursor: zoom-out; opacity: 1;">
+        <div style="display:inline-block;height:100%;vertical-align:middle;"></div>
+        <div
+            style="position:absolute;left:0;top:0;width:100%;height:100%;background:#000000;opacity:0;filter:alpha(opacity=0);">
+        </div>
+        <div class="poptrox-popup"
+            style="display: inline-block; vertical-align: middle; position: relative; z-index: 1; cursor: zoom-out; min-width: 10px; min-height: 10px; width: auto; height: auto;">
+            <div class="loader" style="display: none;"></div>
+            <div class="pic" style="text-indent: 0px;"><img
+                    src="${ postImg[imgi].srcset || postImg[imgi].src }" alt="Loading..."
+                    style="vertical-align: bottom; max-width: 85vw; max-height: 85vh;"></div>
+        </div>
+    </div>`;
+            document.body.appendChild(zoomImg);
+                document.querySelector("#zoomImg").onclick = () => {
+                    document.querySelector("#zoomImg").remove();
+                }
+        }
+    }
+    
+</script>
+
+
+
+
+    <script>
+        query("#toc-btn")[0].onclick = () => {
+            if (query(".post-toc")[0].innerHTML) {
+                toggleClass(".post-toc", "display-inline");
+            }
+        }
+
+        if (!query(".post-toc")[0].innerHTML) {
+            addClass("#toc-btn","display-none");
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+        </div>
+        <div id="css-loading">
+            <h3 class="text-center">加载中...</h3>
+        </div>
+        
+    </body>
+</html>
