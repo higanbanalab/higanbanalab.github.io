@@ -362,6 +362,14 @@ header .header__right .dropdown-menus .dropdown-menu {
     
     <script src="/js/main.js"></script>
     
+    <script>
+        let mdate = "9-18";
+        let ndate = new Date();
+        if (mdate == (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+            addClass("html", "memorial");
+        }
+    </script>
+    
 <meta name="generator" content="Hexo 6.3.0"></head>
 
     <body>
@@ -468,6 +476,14 @@ header .header__right .dropdown-menus .dropdown-menu {
       </span>
     
     
+    
+      
+      <span class="post-meta">
+        <span class="p-dot"></span>
+        <span id="busuanzi_container_page_pv">
+          共 <span id="busuanzi_value_page_pv"></span> 次阅读
+        </span>
+      </span>
     
   </div>
   
@@ -632,6 +648,15 @@ header .header__right .dropdown-menus .dropdown-menu {
 
 
 
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
 
 
 

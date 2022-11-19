@@ -362,6 +362,14 @@ header .header__right .dropdown-menus .dropdown-menu {
     
     <script src="/js/main.js"></script>
     
+    <script>
+        let mdate = "9-18";
+        let ndate = new Date();
+        if (mdate == (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+            addClass("html", "memorial");
+        }
+    </script>
+    
 <meta name="generator" content="Hexo 6.3.0"></head>
 
     <body>
@@ -445,7 +453,7 @@ header .header__right .dropdown-menus .dropdown-menu {
 
 <article class="page">
   <div class="archive-list">
-    <p class="h4">共计 7 篇文章</p>
+    <p class="h4">共计 9 篇文章</p>
     <hr>
     
     
@@ -549,6 +557,15 @@ header .header__right .dropdown-menus .dropdown-menu {
 
 
 
+
+    <script>
+        setTimeout(() => {
+            loadScriptFile({
+                url: "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js",
+                loadType: "async"
+            });
+        },0);
+    </script>
 
 
 
